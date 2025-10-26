@@ -1,0 +1,163 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sivasaran — All Links</title>
+  <meta name="description" content="Sivasaran — one page to redirect to all your projects and pages" />
+  <style>
+    :root{
+      --bg-transition-duration: 900ms;
+      --card-bg: rgba(255,255,255,0.08);
+      --card-blur: 8px;
+      --accent: rgba(255,255,255,0.9);
+      --max-width: 920px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+    body{
+      display:flex;align-items:center;justify-content:center;
+      min-height:100vh;padding:32px;
+      background:linear-gradient(135deg,#ffaf7b 0%,#ff7b7b 100%);
+      transition:background var(--bg-transition-duration) ease-in-out;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }.container{
+  width:100%;max-width:var(--max-width);
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  padding:28px;border-radius:18px;backdrop-filter: blur(var(--card-blur));
+  box-shadow:0 10px 30px rgba(10,10,10,0.25);
+}
+
+header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.brand{display:flex;flex-direction:column}
+h1{margin:0;font-size:20px;color:var(--accent);letter-spacing:0.2px}
+p.lead{margin:4px 0 0;color:rgba(255,255,255,0.85);font-size:13px}
+
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px}
+.link-card{
+  display:flex;flex-direction:column;justify-content:center;padding:18px;border-radius:12px;
+  background:var(--card-bg);color:var(--accent);text-decoration:none;transition:transform 220ms ease, box-shadow 220ms ease;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.link-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.22)}
+.link-title{font-weight:600;font-size:16px;margin:0 0 6px}
+.link-sub{font-size:12px;opacity:0.9;margin:0;color:rgba(255,255,255,0.85)}
+.link-url{font-size:11px;opacity:0.75;margin-top:8px;word-break:break-all}
+
+.footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:rgba(255,255,255,0.85);font-size:13px}
+.btn{display:inline-block;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.12);color:var(--accent);text-decoration:none;border:1px solid rgba(255,255,255,0.06)}
+
+/* small touches */
+@media (max-width:520px){body{padding:18px}.container{padding:18px}}
+
+/* accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  :root{--bg-transition-duration:0ms}
+  .link-card{transition:none}
+}
+
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <div style="width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-weight:700;color:rgba(255,255,255,0.95);font-size:20px">S</div>
+      <div class="brand">
+        <h1>Sivasaran — Quick Links</h1>
+        <p class="lead">All your important pages in one responsive page. Background warms up every second.</p>
+      </div>
+    </header><nav class="links" aria-label="Sivasaran links">
+  <a class="link-card" href="https://sites.google.com/view/sivasaran/home" target="_blank" rel="noopener noreferrer" aria-label="IT projects">
+    <div class="link-title">IT projects</div>
+    <div class="link-sub">Google Sites — Projects and portfolio</div>
+    <div class="link-url">sites.google.com/view/sivasaran/home</div>
+  </a>
+
+  <a class="link-card" href="https://sivasarans.github.io/maths/" target="_blank" rel="noopener noreferrer" aria-label="Banking practice">
+    <div class="link-title">Banking practice</div>
+    <div class="link-sub">Maths practice and banking questions</div>
+    <div class="link-url">sivasarans.github.io/maths/</div>
+  </a>
+
+  <a class="link-card" href="https://sivasarans.github.io/Family/" target="_blank" rel="noopener noreferrer" aria-label="Family house expenses tracker">
+    <div class="link-title">Family house expenses tracker</div>
+    <div class="link-sub">Expense tracker app / static pages</div>
+    <div class="link-url">sivasarans.github.io/Family/</div>
+  </a>
+
+</nav>
+
+<div class="footer">
+  <div>Tip: tap any card to open in a new tab.</div>
+  <div><a class="btn" href="#" id="addLinkBtn">+ Add link</a></div>
+</div>
+
+  </div>  <script>
+    // Warm color palettes (pairs) — will rotate randomly each second
+    const warmPairs = [
+      ['#FF9A8B','#FF6A88'],
+      ['#FFB87A','#FF7E5F'],
+      ['#FFD194','#FFB199'],
+      ['#FF7E5F','#FEB47B'],
+      ['#FFAF7B','#FF7B7B'],
+      ['#FF9F5F','#FF6B6B']
+    ];
+
+    const rootBody = document.body;
+    let idx = 0;
+
+    function setWarmBackground(pair){
+      // pair: [colorA,colorB]
+      rootBody.style.background = `linear-gradient(135deg, ${pair[0]} 0%, ${pair[1]} 100%)`;
+    }
+
+    // rotate every 1s, but pause if user prefers reduced motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!prefersReduced){
+      setWarmBackground(warmPairs[idx]);
+      setInterval(()=>{
+        idx = (idx + 1) % warmPairs.length;
+        setWarmBackground(warmPairs[idx]);
+      }, 1000);
+    }
+
+    // Allow quick adding of links (local only) — stores in localStorage
+    const addBtn = document.getElementById('addLinkBtn');
+    addBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const title = prompt('Link title (example: My Blog)');
+      if(!title) return;
+      const url = prompt('Full URL (include https://)');
+      if(!url) return;
+
+      const nav = document.querySelector('.links');
+      const a = document.createElement('a');
+      a.className = 'link-card'; a.href = url; a.target = '_blank'; a.rel='noopener noreferrer';
+      a.innerHTML = `<div class=\"link-title\">${escapeHtml(title)}</div><div class=\"link-sub\">Custom link</div><div class=\"link-url\">${escapeHtml(url)}</div>`;
+      nav.appendChild(a);
+
+      // Save to simple localStorage list
+      const saved = JSON.parse(localStorage.getItem('sivasaran_links')||'[]');
+      saved.push({title,url});
+      localStorage.setItem('sivasaran_links', JSON.stringify(saved));
+    });
+
+    // basic escaping
+    function escapeHtml(s){return String(s).replace(/[&<>\"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c]});}
+
+    // Load any saved links from localStorage on start
+    (function loadSaved(){
+      const saved = JSON.parse(localStorage.getItem('sivasaran_links')||'[]');
+      if(!saved || !saved.length) return;
+      const nav = document.querySelector('.links');
+      saved.forEach(({title,url})=>{
+        const a = document.createElement('a');
+        a.className = 'link-card'; a.href = url; a.target = '_blank'; a.rel='noopener noreferrer';
+        a.innerHTML = `<div class=\"link-title\">${escapeHtml(title)}</div><div class=\"link-sub\">Custom link</div><div class=\"link-url\">${escapeHtml(url)}</div>`;
+        nav.appendChild(a);
+      });
+    })();
+  </script></body>
+</html>￼Enter
